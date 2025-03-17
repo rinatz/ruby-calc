@@ -24,9 +24,7 @@ def to_rpn(formula)
     elsif i == '('
       stack.push(i)
     elsif i == ')'
-      while stack[-1] != '('
-        result.push(stack.pop)
-      end
+      result.push(stack.pop) until stack[-1] == '('
       stack.pop
     end
   end
