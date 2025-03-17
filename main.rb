@@ -11,15 +11,11 @@ def to_rpn(formula)
   formula.split(/([\+\-\*\/\(\)])/).each do |i|
     if integer?(i)
       result.push(i)
-    elsif i == '+' || i == '-'
-      if stack[-1] == '+' || stack[-1] == '-' || stack[-1] == '*' || stack[-1] == '/'
-        result.push(stack.pop)
-      end
+    elsif %w[+ -].include?(i)
+      result.push(stack.pop) if %w[+ - * /].include?(stack[-1])
       stack.push(i)
-    elsif i == '*' || i == '/'
-      if stack[-1] == '*' || stack[-1] == '/'
-        result.push(stack.pop)
-      end
+    elsif %w[* /].include?(i)
+      result.push(stack.pop) if %w[* /].include?(stack[-1])
       stack.push(i)
     elsif i == '('
       stack.push(i)
@@ -42,19 +38,19 @@ def main
 
   formula.each do |i|
     case i
-    when '+' then
+    when '+'
       result = stack.pop
       result = stack.pop + result
       stack.push(result)
-    when '-' then
+    when '-'
       result = stack.pop
       result = stack.pop - result
       stack.push(result)
-    when '*' then
+    when '*'
       result = stack.pop
       result = stack.pop * result
       stack.push(result)
-    when '/' then
+    when '/'
       result = stack.pop
       result = stack.pop / result
       stack.push(result)
