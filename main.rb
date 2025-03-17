@@ -43,19 +43,20 @@ def main
   result = 0
 
   formula.each do |i|
-    if i == '+'
+    case i
+    when '+' then
       result = stack.pop
       result = stack.pop + result
       stack.push(result)
-    elsif i == '-'
+    when '-' then
       result = stack.pop
       result = stack.pop - result
       stack.push(result)
-    elsif i == '*'
+    when '*' then
       result = stack.pop
       result = stack.pop * result
       stack.push(result)
-    elsif i == '/'
+    when '/' then
       result = stack.pop
       result = stack.pop / result
       stack.push(result)
