@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
-def integer?(str)
-  !Integer(str).nil? rescue false
+def integer_string?(str)
+  str.match?(/\A-?\d+\z/)
 end
 
 def to_rpn(formula)
@@ -9,7 +9,7 @@ def to_rpn(formula)
   stack = []
 
   formula.split(/([\+\-\*\/\(\)])/).each do |i|
-    if integer?(i)
+    if integer_string?(i)
       result.push(i)
     elsif %w[+ -].include?(i)
       result.push(stack.pop) if %w[+ - * /].include?(stack[-1])
