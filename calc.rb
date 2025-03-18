@@ -30,13 +30,13 @@ def to_rpn(formula)
   result
 end
 
-def main
-  formula = to_rpn(ARGV[0])
+def calc(formula)
+  rpn = to_rpn(formula)
 
   stack = []
   result = 0
 
-  formula.each do |i|
+  rpn.each do |i|
     case i
     when '+'
       result = stack.pop
@@ -59,7 +59,12 @@ def main
     end
   end
 
-  print result
+  result
+end
+
+def main
+  formula = ARGV[0]
+  print calc(formula)
 end
 
 main
