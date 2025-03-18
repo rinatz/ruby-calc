@@ -8,7 +8,7 @@ def to_rpn(formula)
   result = []
   stack = []
 
-  formula.split(/([\+\-\*\/\(\)])/).each do |i|
+  formula.split(%r{([+\-*/()])}).each do |i|
     if integer_string?(i)
       result.push(i)
     elsif %w[+ -].include?(i)
