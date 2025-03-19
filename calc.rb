@@ -10,7 +10,7 @@ def to_rpn(formula)
   result = []
   stack = []
 
-  formula.split(%r{([+\-*/()])}).each do |i|
+  formula.split(%r{([+\-*/()\s])}).each do |i|
     if integer_string?(i)
       result.push(i)
     elsif %w[+ -].include?(i)
@@ -69,4 +69,4 @@ def main
   print calc(formula)
 end
 
-main
+main if __FILE__ == $PROGRAM_NAME
