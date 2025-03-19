@@ -3,6 +3,49 @@
 require 'minitest/autorun'
 require_relative 'calc'
 
+# Test cases for the integer_string? method.
+class IntegerStringTest < Minitest::Test
+  def test_simple_string
+    assert integer_string?('1')
+  end
+
+  def test_multiple_digits
+    assert integer_string?('12')
+  end
+
+  def test_negative
+    assert integer_string?('-1')
+  end
+
+  def test_negative_multiple_digits
+    assert integer_string?('-12')
+  end
+
+  def test_zero_padding
+    assert integer_string?('01')
+  end
+
+  def test_empty_string
+    refute integer_string?('')
+  end
+
+  def test_alphabet
+    refute integer_string?('abcABC')
+  end
+
+  def test_float
+    refute integer_string?('1.0')
+  end
+
+  def test_alphanumeric
+    refute integer_string?('1a')
+  end
+
+  def test_hexadecimal
+    refute integer_string?('0xdeadbeef')
+  end
+end
+
 # Test cases for the RPN algorithm.
 class RpnTest < Minitest::Test
   def test_addition
@@ -114,5 +157,9 @@ class CalcTest < Minitest::Test
 
   def test_space
     assert_equal 3, calc('1 + 2')
+  end
+
+  def test_zero_padding
+    assert_equal 3, calc('01+02')
   end
 end
