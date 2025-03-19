@@ -4,6 +4,8 @@ def integer_string?(str)
   str.match?(/\A-?\d+\z/)
 end
 
+# Convert a formula to reverse polish notation (RPN).
+# See: https://en.wikipedia.org/wiki/Shunting_yard_algorithm
 def to_rpn(formula)
   result = []
   stack = []
